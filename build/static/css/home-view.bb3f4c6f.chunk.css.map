@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/components/PageHeading/PageHeading.module.css"],"names":[],"mappings":"AAAA,0BACE,WAAY,CACZ,YAAa,CACb,iBAAkB,CAClB,cAAe,CACf,eACF","file":"home-view.bb3f4c6f.chunk.css","sourcesContent":[".title {\n  padding: 8px;\n  margin-top: 0;\n  border-radius: 8px;\n  font-size: 40px;\n  font-weight: 500;\n}\n"]}

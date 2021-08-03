@@ -1,5 +1,5 @@
-import { NavLink } from 'react-router-dom';
-import styles from './Navigation.module.css';
+import { NavLink } from 'react-router-dom'
+import styles from './Navigation.module.css'
 
 export default function Navigation() {
   return (
@@ -10,7 +10,7 @@ export default function Navigation() {
         className={styles.link}
         activeClassName={styles.activeLink}
       >
-        Главная
+        Home
       </NavLink>
 
       <NavLink
@@ -18,24 +18,16 @@ export default function Navigation() {
         className={styles.link}
         activeClassName={styles.activeLink}
       >
-        Авторы
+        Movies
       </NavLink>
 
-      <NavLink
+      {/* <NavLink
         to="/books"
         className={styles.link}
         activeClassName={styles.activeLink}
       >
         Книги
-      </NavLink>
-
-      <NavLink
-        to="/table"
-        className={styles.link}
-        activeClassName={styles.activeLink}
-      >
-        Таблица
-      </NavLink>
+      </NavLink> */}
     </nav>
-  );
+  )
 }

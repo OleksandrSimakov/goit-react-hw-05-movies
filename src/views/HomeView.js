@@ -1,65 +1,32 @@
-import PageHeading from '../components/PageHeading/PageHeading';
+import { useState, useEffect } from 'react'
+import { Link, useRouteMatch } from 'react-router-dom'
+import * as moviesApi from '../services/movies-api'
+import PageHeading from '../components/PageHeading/PageHeading'
 
 export default function HomeView() {
+  const { url } = useRouteMatch()
+  const [movies, setMovies] = useState([])
+
+  useEffect(() => {
+    moviesApi.fetchTrending().then(setMovies)
+  }, [])
+
   return (
     <>
-      <PageHeading text="Добро пожаловать" />
+      <PageHeading text="Trending today" />
 
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex vel velit
-        nihil illo est! Quos cum rerum dolores voluptates odio iste est nam
-        excepturi placeat eligendi voluptatibus a illo eos ipsam, necessitatibus
-        quo at quae pariatur et asperiores odit! Quasi sunt odit omnis at
-        deserunt placeat ipsa earum dignissimos magni voluptatum quisquam veniam
-        libero qui fugit accusantium cum ratione, facilis tempore in!
-        Voluptates, minus nesciunt sed optio voluptate et quae accusamus est
-        eos, dolorum quibusdam dolorem debitis perferendis voluptas rem quos
-        eius ab, commodi cumque dolor. Repellendus porro impedit, enim
-        temporibus quibusdam eum natus corporis id? Ducimus fugit consequatur
-        consequuntur.
-      </p>
-
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex vel velit
-        nihil illo est! Quos cum rerum dolores voluptates odio iste est nam
-        excepturi placeat eligendi voluptatibus a illo eos ipsam, necessitatibus
-        quo at quae pariatur et asperiores odit! Quasi sunt odit omnis at
-        deserunt placeat ipsa earum dignissimos magni voluptatum quisquam veniam
-        libero qui fugit accusantium cum ratione, facilis tempore in!
-        Voluptates, minus nesciunt sed optio voluptate et quae accusamus est
-        eos, dolorum quibusdam dolorem debitis perferendis voluptas rem quos
-        eius ab, commodi cumque dolor. Repellendus porro impedit, enim
-        temporibus quibusdam eum natus corporis id? Ducimus fugit consequatur
-        consequuntur.
-      </p>
-
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex vel velit
-        nihil illo est! Quos cum rerum dolores voluptates odio iste est nam
-        excepturi placeat eligendi voluptatibus a illo eos ipsam, necessitatibus
-        quo at quae pariatur et asperiores odit! Quasi sunt odit omnis at
-        deserunt placeat ipsa earum dignissimos magni voluptatum quisquam veniam
-        libero qui fugit accusantium cum ratione, facilis tempore in!
-        Voluptates, minus nesciunt sed optio voluptate et quae accusamus est
-        eos, dolorum quibusdam dolorem debitis perferendis voluptas rem quos
-        eius ab, commodi cumque dolor. Repellendus porro impedit, enim
-        temporibus quibusdam eum natus corporis id? Ducimus fugit consequatur
-        consequuntur.
-      </p>
-
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex vel velit
-        nihil illo est! Quos cum rerum dolores voluptates odio iste est nam
-        excepturi placeat eligendi voluptatibus a illo eos ipsam, necessitatibus
-        quo at quae pariatur et asperiores odit! Quasi sunt odit omnis at
-        deserunt placeat ipsa earum dignissimos magni voluptatum quisquam veniam
-        libero qui fugit accusantium cum ratione, facilis tempore in!
-        Voluptates, minus nesciunt sed optio voluptate et quae accusamus est
-        eos, dolorum quibusdam dolorem debitis perferendis voluptas rem quos
-        eius ab, commodi cumque dolor. Repellendus porro impedit, enim
-        temporibus quibusdam eum natus corporis id? Ducimus fugit consequatur
-        consequuntur.
-      </p>
+      {movies && (
+        <ul>
+          {movies.map(
+            (movie) =>
+              movie.title && (
+                <li key={movie.id}>
+                  <Link to={`${url}/${movie.id}`}>{movie.title}</Link>
+                </li>
+              ),
+          )}
+        </ul>
+      )}
     </>
-  );
+  )
 }

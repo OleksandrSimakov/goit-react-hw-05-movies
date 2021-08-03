@@ -1,29 +1,29 @@
-import { useState, useEffect } from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
-import * as bookShelfAPI from '../services/bookshelf-api';
-import PageHeading from '../components/PageHeading/PageHeading';
+// import { useState, useEffect } from 'react'
+// import { Link, useRouteMatch } from 'react-router-dom'
+// import * as moviesApi from '../services/movies-api'
+// import PageHeading from '../components/PageHeading/PageHeading'
 
-export default function BooksView() {
-  const { url } = useRouteMatch();
-  const [books, setBooks] = useState([]);
+// export default function BooksView() {
+//   const { url } = useRouteMatch()
+//   const [books, setBooks] = useState([])
 
-  useEffect(() => {
-    bookShelfAPI.fetchBooks().then(setBooks);
-  }, []);
+//   useEffect(() => {
+//     moviesApi.fetchBooks().then(setBooks)
+//   }, [])
 
-  return (
-    <>
-      <PageHeading text="Книги" />
+//   return (
+//     <>
+//       <PageHeading text="Книги" />
 
-      {books && (
-        <ul>
-          {books.map(book => (
-            <li key={book.id}>
-              <Link to={`${url}/${book.id}`}>{book.title}</Link>
-            </li>
-          ))}
-        </ul>
-      )}
-    </>
-  );
-}
+//   {books && (
+//     <ul>
+//       {books.map((book) => (
+//         <li key={book.id}>
+//           <Link to={`${url}/${book.id}`}>{book.title}</Link>
+//         </li>
+//       ))}
+//     </ul>
+//   )}
+//     </>
+//   )
+// }
