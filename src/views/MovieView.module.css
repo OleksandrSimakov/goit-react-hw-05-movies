@@ -1,0 +1,17 @@
+.card {
+  display: flex;
+}
+.image {
+  margin-right: 30px;
+}
+.description {
+  max-height: 400px;
+}
+.genres {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+}
+.list:not(:last-child) {
+  margin-right: 10px;
+}

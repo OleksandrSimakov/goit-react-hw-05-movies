@@ -2,7 +2,7 @@
 // import { NavLink, Route, useRouteMatch } from 'react-router-dom'
 // import * as moviesApi from '../services/movies-api'
 // import PageHeading from '../components/PageHeading/PageHeading'
-// // import AuthorSubView from './AuthorSubView';
+// import AuthorSubView from './AuthorSubView';
 
 // const AuthorSubView = lazy(() =>
 //   import('./AuthorSubView.js' /* webpackChunkName: "authors-subview"*/),
@@ -29,13 +29,13 @@
 //           ))}
 //         </ul>
 //       )}
-//       <hr />
+//   <hr />
 
-//       <Suspense fallback={<h1>Загружаем подмаршрут...</h1>}>
-//         <Route path={`${path}/:authorId`}>
-//           {authors && <AuthorSubView authors={authors} />}
-//         </Route>
-//       </Suspense>
+//   <Suspense fallback={<h1>Загружаем подмаршрут...</h1>}>
+//     <Route path={`${path}/:authorId`}>
+//       {authors && <AuthorSubView authors={authors} />}
+//     </Route>
+//   </Suspense>
 //     </>
 //   )
 // }
