@@ -2,21 +2,24 @@ import { lazy, Suspense } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import AppBar from './components/AppBar/AppBar'
 import Container from './components/Container/Container'
-// import HomeView from './views/HomeView';
+
 // import AuthorsView from './views/AuthorsView';
 // import BooksView from './views/BooksView';
-import MovieView from './views/MovieView'
-// import NotFoundView from './views/NotFoundView';
 
 const HomeView = lazy(() =>
   import('./views/HomeView.js' /* webpackChunkName: "home-view" */),
+)
+const MovieView = lazy(() =>
+  import('./views/MovieView.js' /* webpackChunkName: "movie-view" */),
+)
+const NotFoundView = lazy(() =>
+  import('./views/NotFoundView.js' /* webpackChunkName: "not-found-view" */),
 )
 // const AuthorsView = lazy(() =>
 //   import('./views/AuthorsView.js' /* webpackChunkName: "authors-view" */),
 // )
 // const BooksView = lazy(() => import('./views/BooksView.js'))
 // const BookDetailsView = lazy(() => import('./views/BookDetailsView.js'))
-// const NotFoundView = lazy(() => import('./views/NotFoundView.js'))
 
 export default function App() {
   return (
@@ -39,11 +42,11 @@ export default function App() {
 
           <Route path="/books" exact>
             <BooksView />
-          </Route>
+          </Route> */}
 
           <Route>
             <NotFoundView />
-          </Route> */}
+          </Route>
         </Switch>
       </Suspense>
     </Container>

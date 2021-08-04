@@ -1,32 +1,29 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy } from 'react'
 import { useParams, Route, NavLink } from 'react-router-dom'
 import { useRouteMatch } from 'react-router'
 import * as moviesApi from '../services/movies-api'
 import css from '../views/MovieView.module.css'
-import MovieCastView from './MovieCastView'
-import MovieReviewView from './MovieReviewView'
+
+const MovieReviewView = lazy(() =>
+  import('./MovieReviewView' /* webpackChunkName: "movie-review-view" */),
+)
+const MovieCastView = lazy(() =>
+  import('./MovieCastView' /* webpackChunkName: "movie-cast-view" */),
+)
 
 export default function MovieDetailsPage() {
-  const styles = {
-    list: {
-      marginLeft: '20px',
-    },
-  }
   const { movieId } = useParams()
   const { url } = useRouteMatch()
 
   const [movie, setMovie] = useState(null)
   const [casts, setCasts] = useState(null)
-  const [reviews, setReviews] = useState([])
+  const [reviews, setReviews] = useState(null)
 
   useEffect(() => {
     moviesApi.fetchDetails(movieId).then(setMovie)
     moviesApi.fetchCast(movieId).then(setCasts)
     moviesApi.fetchReviews(movieId).then(setReviews)
   }, [movieId])
-  // console.log(movie)
-  // console.log(casts)
-  console.log(reviews)
 
   return (
     <>
@@ -57,11 +54,11 @@ export default function MovieDetailsPage() {
           </div>
         </div>
       )}
-      <hr />
 
+      <hr />
       <div>
         <p>Additional information</p>
-        <ul style={styles.list}>
+        <ul className={css.reviewList}>
           <li>
             <NavLink to={`${url}/cast`}>Cast</NavLink>
           </li>
@@ -75,12 +72,9 @@ export default function MovieDetailsPage() {
       <Route path="/movies/:movieId/cast">
         {casts && <MovieCastView casts={casts} />}
       </Route>
+
       <Route path="/movies/:movieId/reviews">
-        {reviews.length > 0 ? (
-          <MovieReviewView reviews={reviews} />
-        ) : (
-          <p>We don`t have any reviews for this movie</p>
-        )}
+        {reviews && <MovieReviewView reviews={reviews} />}
       </Route>
     </>
   )

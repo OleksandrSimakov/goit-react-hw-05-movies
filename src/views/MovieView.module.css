@@ -15,3 +15,6 @@
 .list:not(:last-child) {
   margin-right: 10px;
 }
+.reviewList {
+  margin-left: 20px;
+}
