@@ -17,7 +17,7 @@ export default function MovieDetailsPage() {
 
   const [movie, setMovie] = useState(null)
   const [casts, setCasts] = useState(null)
-  const [reviews, setReviews] = useState(null)
+  const [reviews, setReviews] = useState([])
 
   useEffect(() => {
     moviesApi.fetchDetails(movieId).then(setMovie)
@@ -76,7 +76,11 @@ export default function MovieDetailsPage() {
         {casts && <MovieCastView casts={casts} />}
       </Route>
       <Route path="/movies/:movieId/reviews">
-        {reviews && <MovieReviewView reviews={reviews} />}
+        {reviews.length > 0 ? (
+          <MovieReviewView reviews={reviews} />
+        ) : (
+          <p>We don`t have any reviews for this movie</p>
+        )}
       </Route>
     </>
   )
