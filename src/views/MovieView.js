@@ -1,16 +1,32 @@
 import { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Route, NavLink } from 'react-router-dom'
+import { useRouteMatch } from 'react-router'
 import * as moviesApi from '../services/movies-api'
 import css from '../views/MovieView.module.css'
+import MovieCastView from './MovieCastView'
+import MovieReviewView from './MovieReviewView'
 
 export default function MovieDetailsPage() {
+  const styles = {
+    list: {
+      marginLeft: '20px',
+    },
+  }
   const { movieId } = useParams()
+  const { url } = useRouteMatch()
 
   const [movie, setMovie] = useState(null)
+  const [casts, setCasts] = useState(null)
+  const [reviews, setReviews] = useState(null)
 
   useEffect(() => {
     moviesApi.fetchDetails(movieId).then(setMovie)
+    moviesApi.fetchCast(movieId).then(setCasts)
+    moviesApi.fetchReviews(movieId).then(setReviews)
   }, [movieId])
+  // console.log(movie)
+  // console.log(casts)
+  console.log(reviews)
 
   return (
     <>
@@ -42,18 +58,26 @@ export default function MovieDetailsPage() {
         </div>
       )}
       <hr />
+
       <div>
         <p>Additional information</p>
-        <ul>
+        <ul style={styles.list}>
           <li>
-            <Link to={`/movies/${movieId}/cast`}>Cast</Link>
+            <NavLink to={`${url}/cast`}>Cast</NavLink>
           </li>
           <li>
-            <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+            <NavLink to={`${url}/reviews`}>Reviews</NavLink>
           </li>
         </ul>
       </div>
       <hr />
+
+      <Route path="/movies/:movieId/cast">
+        {casts && <MovieCastView casts={casts} />}
+      </Route>
+      <Route path="/movies/:movieId/reviews">
+        {reviews && <MovieReviewView reviews={reviews} />}
+      </Route>
     </>
   )
 }

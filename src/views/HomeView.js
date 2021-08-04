@@ -4,7 +4,6 @@ import * as moviesApi from '../services/movies-api'
 import PageHeading from '../components/PageHeading/PageHeading'
 
 export default function HomeView() {
-  // const { url } = useRouteMatch()
   const [movies, setMovies] = useState([])
 
   useEffect(() => {
@@ -21,7 +20,6 @@ export default function HomeView() {
             (movie) =>
               movie.title && (
                 <li key={movie.id}>
-                  {/* <Link to={`${url}/${movie.id}`}>{movie.title}</Link> */}
                   <Link to={`movies/${movie.id}`}>{movie.title}</Link>
                 </li>
               ),

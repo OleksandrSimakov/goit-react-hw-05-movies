@@ -43,7 +43,7 @@ export async function fetchCast(movieId) {
       `${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}&language=en-US`,
     )
     const movie = await response.json()
-    console.log(movie)
+    // console.log(movie)
     return movie
   } catch (error) {
     console.log(error)
@@ -56,7 +56,7 @@ export async function fetchReviews(movieId) {
       `${BASE_URL}/movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=1`,
     )
     const movie = await response.json()
-    console.log(movie)
+    // console.log(movie)
     return movie
   } catch (error) {
     console.log(error)
