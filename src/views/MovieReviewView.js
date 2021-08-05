@@ -1,6 +1,5 @@
 export default function MovieReviewView({ reviews }) {
   const reviewsArr = reviews.results
-  console.log(reviewsArr)
   return (
     <>
       {reviewsArr.length > 0 ? (

@@ -1,5 +1,6 @@
 .card {
   display: flex;
+  margin-top: 10px;
 }
 .image {
   margin-right: 30px;

@@ -20,7 +20,14 @@ export default function HomeView() {
             (movie) =>
               movie.title && (
                 <li key={movie.id}>
-                  <Link to={`movies/${movie.id}`}>{movie.title}</Link>
+                  <Link
+                    to={{
+                      pathname: `movies/${movie.id}`,
+                      state: { params: `/` },
+                    }}
+                  >
+                    {movie.title}
+                  </Link>
                 </li>
               ),
           )}

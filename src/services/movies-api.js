@@ -5,7 +5,6 @@ async function fetchWithErrorHandling(url = '') {
   try {
     const response = await fetch(url)
     const movies = await response.json()
-    // console.log(movies)
     return movies.results
   } catch (error) {
     console.log(error)
@@ -18,9 +17,9 @@ export function fetchTrending() {
   )
 }
 
-export function fetchByKeyword() {
+export function fetchByKeyword(query) {
   return fetchWithErrorHandling(
-    `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false`,
+    `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`,
   )
 }
 
@@ -30,7 +29,6 @@ export async function fetchDetails(movieId) {
       `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`,
     )
     const movie = await response.json()
-    // console.log(movie)
     return movie
   } catch (error) {
     console.log(error)
@@ -43,7 +41,6 @@ export async function fetchCast(movieId) {
       `${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}&language=en-US`,
     )
     const movie = await response.json()
-    // console.log(movie)
     return movie
   } catch (error) {
     console.log(error)
@@ -56,7 +53,6 @@ export async function fetchReviews(movieId) {
       `${BASE_URL}/movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=1`,
     )
     const movie = await response.json()
-    // console.log(movie)
     return movie
   } catch (error) {
     console.log(error)

@@ -1,5 +1,11 @@
-import { useState, useEffect, lazy } from 'react'
-import { useParams, Route, NavLink } from 'react-router-dom'
+import { useState, useEffect, useRef, lazy, Suspense } from 'react'
+import {
+  useParams,
+  Route,
+  NavLink,
+  useLocation,
+  useHistory,
+} from 'react-router-dom'
 import { useRouteMatch } from 'react-router'
 import * as moviesApi from '../services/movies-api'
 import css from '../views/MovieView.module.css'
@@ -13,7 +19,16 @@ const MovieCastView = lazy(() =>
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams()
-  const { url } = useRouteMatch()
+  const { url, path } = useRouteMatch()
+  const location = useLocation()
+  const history = useHistory()
+  const routerState = useRef(null)
+
+  useEffect(() => {
+    if (!routerState.current) {
+      routerState.current = location.state
+    }
+  }, [location.state])
 
   const [movie, setMovie] = useState(null)
   const [casts, setCasts] = useState(null)
@@ -25,8 +40,16 @@ export default function MovieDetailsPage() {
     moviesApi.fetchReviews(movieId).then(setReviews)
   }, [movieId])
 
+  const onGoBack = () => {
+    const url = routerState.current ? `${routerState.current.params}` : '/'
+    history.push(url)
+  }
+
   return (
     <>
+      <button type="button" onClick={onGoBack}>
+        ← Go back
+      </button>
       {movie && (
         <div className={css.card}>
           <div className={css.image}>
@@ -68,14 +91,15 @@ export default function MovieDetailsPage() {
         </ul>
       </div>
       <hr />
+      <Suspense fallback={<h1>ЗАГРУЖАЕМ МАРШРУТ...</h1>}>
+        <Route path={`${path}/cast`}>
+          {casts && <MovieCastView casts={casts} />}
+        </Route>
 
-      <Route path="/movies/:movieId/cast">
-        {casts && <MovieCastView casts={casts} />}
-      </Route>
-
-      <Route path="/movies/:movieId/reviews">
-        {reviews && <MovieReviewView reviews={reviews} />}
-      </Route>
+        <Route path={`${path}/reviews`}>
+          {reviews && <MovieReviewView reviews={reviews} />}
+        </Route>
+      </Suspense>
     </>
   )
 }

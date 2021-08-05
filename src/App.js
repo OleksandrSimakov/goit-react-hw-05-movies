@@ -3,9 +3,6 @@ import { Switch, Route } from 'react-router-dom'
 import AppBar from './components/AppBar/AppBar'
 import Container from './components/Container/Container'
 
-// import AuthorsView from './views/AuthorsView';
-// import BooksView from './views/BooksView';
-
 const HomeView = lazy(() =>
   import('./views/HomeView.js' /* webpackChunkName: "home-view" */),
 )
@@ -15,11 +12,9 @@ const MovieView = lazy(() =>
 const NotFoundView = lazy(() =>
   import('./views/NotFoundView.js' /* webpackChunkName: "not-found-view" */),
 )
-// const AuthorsView = lazy(() =>
-//   import('./views/AuthorsView.js' /* webpackChunkName: "authors-view" */),
-// )
-// const BooksView = lazy(() => import('./views/BooksView.js'))
-// const BookDetailsView = lazy(() => import('./views/BookDetailsView.js'))
+const MovieSearchView = lazy(() =>
+  import('./views/MovieSearchView' /* webpackChunkName: "movie-search-view" */),
+)
 
 export default function App() {
   return (
@@ -36,13 +31,9 @@ export default function App() {
             <MovieView />
           </Route>
 
-          {/* <Route path="/authors">
-            <AuthorsView />
+          <Route path="/movies">
+            <MovieSearchView />
           </Route>
-
-          <Route path="/books" exact>
-            <BooksView />
-          </Route> */}
 
           <Route>
             <NotFoundView />

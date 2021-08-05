@@ -20,14 +20,6 @@ export default function Navigation() {
       >
         Movies
       </NavLink>
-
-      {/* <NavLink
-        to="/books"
-        className={styles.link}
-        activeClassName={styles.activeLink}
-      >
-        Книги
-      </NavLink> */}
     </nav>
   )
 }
